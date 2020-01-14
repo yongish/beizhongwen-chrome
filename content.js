@@ -456,10 +456,10 @@ function onMouseMove(mouseMove) {
     let dx = popX - mouseMove.clientX;
     let dy = popY - mouseMove.clientY;
     let distance = Math.sqrt(dx * dx + dy * dy);
-    if (distance > 4) {
-        clearHighlight();
-        hidePopup();
-    }
+    // if (distance > 4) {
+        // clearHighlight();
+        // hidePopup();
+    // }
 }
 
 function triggerSearch() {
@@ -491,7 +491,7 @@ function triggerSearch() {
         (u < 0xFF21 || 0xFF3A < u) &&
         (u < 0xFF41 || 0xFF5A < u))) {
         clearHighlight();
-        hidePopup();
+        // hidePopup();
         return 3;
     }
 
