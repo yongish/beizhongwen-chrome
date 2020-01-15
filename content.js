@@ -14,6 +14,7 @@ let clientX;
 
 let clientY;
 
+let height;
 let bottomY;
 let topY;
 
@@ -639,10 +640,9 @@ function showPopup(html, elem, x, y, looseWidth) {
 
             // go up if necessary
             if (y + v + pH > window.innerHeight) {
-                let t = y - pH - 30;
-                console.log("t: " + t);
+                // let t = y - pH - 30;
+                let t = bottomY - pH - height;
                 if (t >= 0) {
-                    console.log("greater");
                     y = t;
                 }
             } else  {
@@ -697,7 +697,9 @@ function highlightMatch(doc, rangeStartNode, rangeStartOffset, matchLen, selEndL
 
     const domRect = range.getBoundingClientRect();
     bottomY = domRect.bottom;
-    topY = domRect.top
+    topY = domRect.top;
+    height = domRect.height;
+    // console.log(domRect);
 
     let sel = window.getSelection();
     if (!sel.isCollapsed && selText !== sel.toString())
