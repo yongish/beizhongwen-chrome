@@ -1,51 +1,3 @@
-/*
- Zhongwen - A Chinese-English Pop-Up Dictionary
- Copyright (C) 2010-2019 Christian Schiller
- https://chrome.google.com/extensions/detail/kkmlkkjojmombglmlpbpapmhcaljjkde
-
- ---
-
- Originally based on Rikaikun 0.8
- Copyright (C) 2010 Erek Speed
- http://code.google.com/p/rikaikun/
-
- ---
-
- Originally based on Rikaichan 1.07
- by Jonathan Zarate
- http://www.polarcloud.com/
-
- ---
-
- Originally based on RikaiXUL 0.4 by Todd Rudick
- http://www.rikai.com/
- http://rikaixul.mozdev.org/
-
- ---
-
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
- ---
-
- Please do not change or remove any of the copyrights or links to web pages
- when modifying any of the files.
-
- */
-
-/* global globalThis */
-
 'use strict';
 
 let config;
@@ -61,6 +13,9 @@ let selText;
 let clientX;
 
 let clientY;
+
+let bottomY;
+let topY;
 
 let selStartDelta;
 
@@ -669,6 +624,7 @@ function showPopup(html, elem, x, y, looseWidth) {
                 // use SELECT's width
                 x += elem.parentNode.offsetWidth + 5;
             }
+
         } else {
             // go left if necessary
             if (x + pW > window.innerWidth - 20) {
@@ -684,11 +640,14 @@ function showPopup(html, elem, x, y, looseWidth) {
             // go up if necessary
             if (y + v + pH > window.innerHeight) {
                 let t = y - pH - 30;
+                console.log("t: " + t);
                 if (t >= 0) {
+                    console.log("greater");
                     y = t;
                 }
             } else  {
-                y += v;
+                // Set y to just below the word.
+                y = bottomY;
             }
 
             x += window.scrollX;
@@ -698,6 +657,9 @@ function showPopup(html, elem, x, y, looseWidth) {
         x += window.scrollX;
         y += window.scrollY;
     }
+
+    console.log("x: " + x);
+    console.log("y: " + y);
 
     // (-1, -1) indicates: leave position unchanged
     if (x !== -1 && y !== -1) {
@@ -732,6 +694,10 @@ function highlightMatch(doc, rangeStartNode, rangeStartOffset, matchLen, selEndL
     let range = doc.createRange();
     range.setStart(rangeStartNode, rangeStartOffset);
     range.setEnd(selEnd.node, offset);
+
+    const domRect = range.getBoundingClientRect();
+    bottomY = domRect.bottom;
+    topY = domRect.top
 
     let sel = window.getSelection();
     if (!sel.isCollapsed && selText !== sel.toString())
