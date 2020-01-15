@@ -696,7 +696,6 @@ function highlightMatch(doc, rangeStartNode, rangeStartOffset, matchLen, selEndL
     bottomY = domRect.bottom;
     topY = domRect.top;
     height = domRect.height;
-
     let sel = window.getSelection();
     if (!sel.isCollapsed && selText !== sel.toString())
         return;
