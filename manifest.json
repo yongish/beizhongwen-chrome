@@ -1,10 +1,10 @@
 {
   "manifest_version": 2,
-  "name": "Zhongwen: Chinese-English Dictionary",
-  "short_name": "Zhongwen",
-  "version": "5.8.0",
-  "author": "Christian Schiller",
-  "homepage_url": "https://github.com/cschiller/zhongwen",
+  "name": "背中文",
+  "short_name": "背中文",
+  "version": "1.0.0",
+  "author": "Zhiyong Tan",
+  "homepage_url": "https://beizhongwen.com",
   "description": "Great tool for learning Chinese. Includes links to Chinese Grammar Wiki. Supports adding words to Skritter.",
   "icons": {
     "16": "images/zhongwen16.png",
@@ -13,7 +13,7 @@
   },
   "browser_action": {
     "default_icon": "images/zhongwen48.png",
-    "default_title": "Zhongwen Chinese Popup Dictionary"
+    "default_title": "背中文"
   },
   "background": {
     "page": "background.html"
@@ -44,7 +44,7 @@
   ],
   "commands": {
     "_execute_browser_action": {
-      "description": "Enable/Disable Zhongwen"
+      "description": "Enable/Disable 背中文"
     }
   },
   "web_accessible_resources": [

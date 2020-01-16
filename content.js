@@ -2,6 +2,8 @@
 
 let config;
 
+let hold = false;
+
 let savedTarget;
 
 let savedRangeNode;
@@ -42,6 +44,7 @@ let zwnj = /\u200c/g;
 function enableTab() {
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('click', onClick)
 }
 
 function disableTab() {
@@ -62,6 +65,15 @@ function disableTab() {
     }
 
     clearHighlight();
+}
+
+const onClick = click => {
+    if (selText) {
+        hold = true;
+    } else {
+        hold = false;
+    }
+    console.log(click);
 }
 
 function onKeyDown(keyDown) {
