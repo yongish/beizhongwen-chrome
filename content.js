@@ -403,6 +403,7 @@ function onMouseMove(mouseMove) {
 
     if (rangeNode && rangeNode.data && rangeOffset < rangeNode.data.length) {
         popX = mouseMove.clientX;
+
         popY = mouseMove.clientY;
         timer = setTimeout(() => triggerSearch(), 50);
         return;
@@ -693,6 +694,7 @@ function highlightMatch(doc, rangeStartNode, rangeStartOffset, matchLen, selEndL
     range.setEnd(selEnd.node, offset);
 
     const domRect = range.getBoundingClientRect();
+    popX = domRect.left;
     bottomY = domRect.bottom;
     topY = domRect.top;
     height = domRect.height;
