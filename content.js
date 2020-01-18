@@ -32,6 +32,8 @@ let timer;
 
 let altView = 0;
 
+let range;
+
 let savedSearchResults = [];
 
 let savedSelStartOffset = 0;
@@ -68,12 +70,16 @@ function disableTab() {
 }
 
 const onClick = click => {
-    if (selText) {
+    if (!hold) {
         hold = true;
     } else {
         hold = false;
+        setTimeout(() => triggerSearch(), 50);
     }
-    console.log(click);
+
+    let sel = window.getSelection();
+    sel.empty();
+    sel.addRange(range);
 }
 
 function onKeyDown(keyDown) {
@@ -413,10 +419,10 @@ function onMouseMove(mouseMove) {
     selStartDelta = 0;
     selStartIncrement = 1;
 
-    if (rangeNode && rangeNode.data && rangeOffset < rangeNode.data.length) {
+    if (!hold && rangeNode && rangeNode.data && rangeOffset < rangeNode.data.length) {
         popX = mouseMove.clientX;
-
         popY = mouseMove.clientY;
+
         timer = setTimeout(() => triggerSearch(), 50);
         return;
     }
@@ -701,7 +707,7 @@ function highlightMatch(doc, rangeStartNode, rangeStartOffset, matchLen, selEndL
         offset -= selEnd.offset;
     }
 
-    let range = doc.createRange();
+    range = doc.createRange();
     range.setStart(rangeStartNode, rangeStartOffset);
     range.setEnd(selEnd.node, offset);
 
