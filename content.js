@@ -79,7 +79,9 @@ const onClick = click => {
 
     let sel = window.getSelection();
     sel.empty();
-    sel.addRange(range);
+    if (range) {
+        sel.addRange(range);
+    }
 }
 
 function onKeyDown(keyDown) {
@@ -431,10 +433,10 @@ function onMouseMove(mouseMove) {
     let dx = popX - mouseMove.clientX;
     let dy = popY - mouseMove.clientY;
     let distance = Math.sqrt(dx * dx + dy * dy);
-    // if (distance > 4) {
-        // clearHighlight();
-        // hidePopup();
-    // }
+    if (!hold && distance > 300) {
+        clearHighlight();
+        hidePopup();
+    }
 }
 
 function triggerSearch() {
@@ -478,6 +480,8 @@ function triggerSearch() {
 
     savedSelStartOffset = selStartOffset;
     savedSelEndList = selEndList;
+
+    console.log(originalText)
 
     chrome.runtime.sendMessage({
             'type': 'search',
@@ -1057,6 +1061,9 @@ chrome.runtime.onMessage.addListener(
             case 'enable':
                 enableTab();
                 config = request.config;
+                $("body").children().each(function () {
+                    $(this).html( $(this).html().replace(/晚/g,"<span class=\"redText\">晚</span>") );
+                });
                 break;
             case 'disable':
                 disableTab();

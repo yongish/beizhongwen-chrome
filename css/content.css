@@ -220,3 +220,8 @@
 #zhongwen-window.tonecolor-hanping .tone5 {
   color: #a0a0a0;
 }
+
+.redText{
+  background: lightpink;
+  border: 1px solid black;
+}
