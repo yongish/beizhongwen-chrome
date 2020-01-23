@@ -78,7 +78,6 @@ const onClick = click => {
     }
 
     let sel = window.getSelection();
-    sel.empty();
     if (range) {
         sel.addRange(range);
     }
