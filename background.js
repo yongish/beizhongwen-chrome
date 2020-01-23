@@ -204,6 +204,9 @@ function search(text) {
         return;
     }
 
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa')
+    console.log(text);
+
     let entry = dict.wordSearch(text);
 
     if (entry) {

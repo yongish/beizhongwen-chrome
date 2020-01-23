@@ -495,6 +495,7 @@ function triggerSearch() {
 }
 
 function processSearchResult(result) {
+    console.log(result);
 
     let selStartOffset = savedSelStartOffset;
     let selEndList = savedSelEndList;
@@ -1061,9 +1062,19 @@ chrome.runtime.onMessage.addListener(
             case 'enable':
                 enableTab();
                 config = request.config;
-                $("body").children().each(function () {
-                    $(this).html( $(this).html().replace(/晚/g,"<span class=\"redText\">晚</span>") );
-                });
+                // $("body").children().each(function () {
+                //     $(this).html( $(this).html().replace(/晚/g,"<span class=\"redText\">晚</span>") );
+                // });
+
+                // Start searching and highlighting.
+                // $("h1, h2, h3, h4, h5, h6, p").each(function(index, element) {
+                //     $(this).html( $(this).html().replace(/晚/g,"<span class=\"redText\">晚</span>") );
+                //     // element.html.replace(/晚/g,"<span class=\"redText\">晚</span>");
+                //     console.log(element.html);
+                // })
+                
+
+
                 break;
             case 'disable':
                 disableTab();
