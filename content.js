@@ -424,6 +424,7 @@ function onMouseMove(mouseMove) {
         popX = mouseMove.clientX;
         popY = mouseMove.clientY;
 
+        console.log('triggerSearch')
         timer = setTimeout(() => triggerSearch(), 50);
         return;
     }
@@ -480,8 +481,6 @@ function triggerSearch() {
     savedSelStartOffset = selStartOffset;
     savedSelEndList = selEndList;
 
-    console.log(originalText)
-
     chrome.runtime.sendMessage({
             'type': 'search',
             'text': text,
@@ -494,8 +493,6 @@ function triggerSearch() {
 }
 
 function processSearchResult(result) {
-    console.log(result);
-
     let selStartOffset = savedSelStartOffset;
     let selEndList = savedSelEndList;
 
@@ -1066,11 +1063,11 @@ chrome.runtime.onMessage.addListener(
                 // });
 
                 // Start searching and highlighting.
-                // $("h1, h2, h3, h4, h5, h6, p").each(function(index, element) {
-                //     $(this).html( $(this).html().replace(/晚/g,"<span class=\"redText\">晚</span>") );
-                //     // element.html.replace(/晚/g,"<span class=\"redText\">晚</span>");
-                //     console.log(element.html);
-                // })
+                $("h1, h2, h3, h4, h5, h6, p").each(function(index, element) {
+                    $(this).html( $(this).html().replace(/晚/g,"<span class=\"redText\">晚</span>") );
+                    // element.html.replace(/晚/g,"<span class=\"redText\">晚</span>");
+                    console.log(element.html);
+                })
                 
 
 
